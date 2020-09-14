@@ -37,7 +37,7 @@ keywordList = (
 )
 
 keywordClassList = (
-    import_.DickIMPORT,
+    import_.FrogIMPORT,
     mainfunc_.DickMAIN,
     func_.DickFUNC,
     object_.DickOBJECT,
