@@ -43,7 +43,7 @@ keywordClassList = (
     object_.FrogOBJECT,
     var_.FrogVAR,
     for_.FrogFOR,
-    if_.DickIF,
+    if_.FrogIF,
     try_.DickTRY,
     except_.DickEXCEPT,
     const_.DickCONST,
