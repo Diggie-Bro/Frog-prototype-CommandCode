@@ -38,7 +38,7 @@ keywordList = (
 
 keywordClassList = (
     import_.FrogIMPORT,
-    mainfunc_.DickMAIN,
+    mainfunc_.FrogMAIN,
     func_.DickFUNC,
     object_.DickOBJECT,
     var_.DickVAR,
