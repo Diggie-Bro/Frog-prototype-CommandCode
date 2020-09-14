@@ -2,7 +2,7 @@
 
 Hello, and thank you for contributing this project.
 We'll be always happy to review your PR, and Forks. 
-**However, if your contributions violate this guideline, your guidelines can be not accepted.** But, don't worry! We promise we won't ban you with your PR. But if you harm other people continually in community, we can give you Yellow Card, or Red Card. Refer [CARD.md](https://github.com/RedoC-github/Bookshelves/blob/master/CARD.md) for detail.
+**However, if your contributions violate this guideline, your guidelines can be not accepted.** But, don't worry! We promise we won't ban you with your PR. But if you harm other people continually in community, we can give you Yellow Card, or Red Card. Refer [CARD.md](./CARD.md) for detail.
 
 # How to contribute?
 You can contriubute with three way: **Issue(Bug, New feature)**, **Pull Request**, **Comment**
