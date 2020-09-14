@@ -42,7 +42,7 @@ keywordClassList = (
     func_.FrogFUNC,
     object_.FrogOBJECT,
     var_.FrogVAR,
-    for_.DickFOR,
+    for_.FrogFOR,
     if_.DickIF,
     try_.DickTRY,
     except_.DickEXCEPT,
