@@ -45,8 +45,8 @@ keywordClassList = (
     for_.FrogFOR,
     if_.FrogIF,
     try_.FrogTRY,
-    except_.DickEXCEPT,
-    const_.DickCONST,
+    except_.FrogEXCEPT,
+    const_.FrogCONST,
     return_.DickRETURN,
     else_.DickELSE,
     elif_.DickELIF
