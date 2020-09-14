@@ -49,7 +49,7 @@ keywordClassList = (
     const_.FrogCONST,
     return_.FrogRETURN,
     else_.FrogELSE,
-    elif_.DickELIF
+    elif_.FrogELIF
 )
 
 
