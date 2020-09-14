@@ -11,6 +11,7 @@ import src.froglang.grammar.operation.assign as assign
 import src.froglang.grammar.operation.dot as dot
 import src.froglang.grammar.operation.range as range_
 import src.froglang.grammar.operation.smallLarge as sl
+import src.froglang.grammar.operation.callfunc as callfunc
 # keyword
 operationList = (
     "=",
@@ -25,7 +26,8 @@ operationList = (
     "<",
     ">",
     "<=",
-    ">="
+    ">=",
+    "()"
 )
 
 operationClassList = (
@@ -40,7 +42,8 @@ operationClassList = (
     sl.SMALL,
     sl.LARGE,
     sl.SMALLEQUAL,
-    sl.LARGEEQUAL
+    sl.LARGEEQUAL,
+    callfunc.CALLFUNC
 )
 
 
