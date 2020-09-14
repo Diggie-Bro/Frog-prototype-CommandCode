@@ -48,7 +48,7 @@ keywordClassList = (
     except_.FrogEXCEPT,
     const_.FrogCONST,
     return_.FrogRETURN,
-    else_.DickELSE,
+    else_.FrogELSE,
     elif_.DickELIF
 )
 
