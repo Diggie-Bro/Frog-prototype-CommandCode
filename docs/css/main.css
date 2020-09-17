@@ -1,13 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&display=swap');
 
-.main_section {
+* {
+    margin: 0;
+}
+
+.frog_section {
     color: whitesmoke;
     text-align: center;
 }
 
+.mainfrog {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    image-rendering: auto;
+}
 body {
     font-family: 'Inter';
 }
+
+
 bold {
     font-weight: 800;
 }
