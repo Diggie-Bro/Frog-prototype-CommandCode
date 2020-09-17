@@ -6,7 +6,7 @@
 <a href="./LICENSE"><img src="https://img.shields.io/badge/LICENSE-MIT-pink"></a>
 <a href="https://github.com/Diggie-Bro"><img src="https://img.shields.io/badge/DiggieBro-white"></a>
 
-![](./img/logo.png?raw=true)
+![](./img/FrogSunyi.png?raw=true)
 ``` python
 import io
 main {
