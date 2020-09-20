@@ -53,15 +53,16 @@ keywordClassList = (
 )
 
 
-def getKeyword(word):
+def getKeyword(wordlist):
     """
     isKeyword(word)
-    check is 'word' in keywordlist
-    :param word:
+    check is 'wordlist' in keywordlist
+    :param wordlist:
     :return:
     """
-    for keyword in keywordList:
-        if keyword in word:
-            return keyword
+    for word in wordlist:
+        for keywd in keywordList:
+            if word == keywd:
+                return keywd
 
     return None
