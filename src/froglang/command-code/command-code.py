@@ -6,6 +6,7 @@ Development Leader: @RedoC
 """
 
 import copy
+import re
 import src.froglang.grammar.operations as oper
 import src.froglang.grammar.keywords as keywd
 
@@ -57,25 +58,50 @@ class CommandCoder:
         if keyword == keywd.keywordList[0]:  # import
             if len(splited_code) != 2:
                 # :TODO GrammmarError handle
-                pass
+                return
+
             grammar_class = keywd.keywordClassList[0]
             if splited_code.index(keyword) == 0:
-                commandcode = grammar_class(splited_code[1]).getcommandcode()
+                commandcode = grammar_class(splited_code[1]).getCommandcode()
                 return commandcode
 
             # :TODO GrammarError handle
         if keyword == keywd.keywordList[1]:  # main
             if len(splited_code) != 2:
                 # :TODO GrammmarError handles
-                pass
+                return
+
             grammar_class = keywd.keywordClassList[1]
             if splited_code.index(keyword) == 0 and splited_code[1] == '{':
-                commandcode = grammar_class().getcommandcodeBegin()
+                commandcode = grammar_class().getCommandcodeBegin()
                 self.bracketlist.append("main")
                 return commandcode
+            # :TODO GrammmarError handles
 
         if keyword == keywd.keywordList[2]:  # func
-            pass
+            """
+            func <funcname> (<params>) {
+            """
+            # code optimization
+            parens = re.findall(r"\(([^)]+)", self.linecode)
+            for i in range(len(parens)):
+                self.linecode = self.linecode.replace(parens[i], parens[i].replace(" ", ""))
+
+            splited_code = self.linecode.split(" ")
+
+            if len(splited_code) != 4:
+                # :TODO GrammmarError handles
+                return
+
+            grammar_class = keywd.keywordClassList[2]
+            if splited_code.index(keyword) == 0 and splited_code[3] == '{':
+                if splited_code[2][0] == '(' and splited_code[2][len(list(splited_code[2])) - 1] == ')':
+                    commandcode = grammar_class(splited_code[1],
+                                                splited_code[2][1:len(list(splited_code[2])) - 1].split(","))\
+                                                .getCommandcodeBegin()
+                    self.bracketlist.append("main")
+                    return commandcode
+
         if keyword == keywd.keywordList[3]:  # object
             pass
         if keyword == keywd.keywordList[4]:  # var
@@ -101,5 +127,7 @@ class CommandCoder:
 if __name__ == '__main__':
     parser = CommandCoder("import io", [])
     print(parser.parse())
-    parser2 = CommandCoder("main{", [])
+    parser2 = CommandCoder("func foo (h1, h2) {", [])
     print(parser2.parse())
+    parser3 = CommandCoder("main {", [])
+    print(parser3.parse())
