@@ -38,7 +38,7 @@ class Parser:
         # keyword check
         keyword = keywd.getKeyword(splited_code)
 
-        temp.remove(keyword)
+        if keyword is not None: temp.remove(keyword)
         # keyword ability check
         if keywd.getKeyword(temp) is not None:
             # :TODO MultiKeywordError handle
@@ -64,7 +64,15 @@ class Parser:
 
             # :TODO GrammarError handle
         if keyword == keywd.keywordList[1]:  # main
-            pass
+            if len(splited_code) != 2:
+                # :TODO GrammmarError handles
+                pass
+            grammar_class = keywd.keywordClassList[1]
+            if splited_code.index(keyword) == 0 and splited_code[1] == '{':
+                bytecode = grammar_class().getBytecodeBegin()
+                self.bracketlist.append("main")
+                return bytecode
+
         if keyword == keywd.keywordList[2]:  # func
             pass
         if keyword == keywd.keywordList[3]:  # object
@@ -92,3 +100,5 @@ class Parser:
 if __name__ == '__main__':
     parser = Parser("import io", [])
     print(parser.parse())
+    parser2 = Parser("main{", [])
+    print(parser2.parse())
