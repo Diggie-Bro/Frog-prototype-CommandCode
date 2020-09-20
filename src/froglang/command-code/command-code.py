@@ -32,7 +32,6 @@ class CommandCoder:
         """
 
         splited_code = self.linecode.split(" ")
-        temp = []
         temp = copy.deepcopy(splited_code)
 
         # keyword check
