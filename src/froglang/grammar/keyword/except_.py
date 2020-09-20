@@ -14,27 +14,27 @@ class FrogEXCEPT:
     def __init__(self, error: str):
         self.error = error
 
-    def getBytecodeBegin(self):
+    def getCommandcodeBegin(self):
         """
-        getBytecodeBegin(self)
-        get bytecode of begin except
+        getCommandcodeBegin(self)
+        get commandcode of begin except
         :return:
         """
-        bytecode = "(BEGINEXCEPT ({})".format(self.error)    # bytecode
-        return bytecode
+        commandcode = "(BEGINEXCEPT ({})".format(self.error)    # commandcode
+        return commandcode
 
-    def getBytecodeEND(self):
+    def getCommandcodeEND(self):
         """
-        getBytecodeEND(self)
-        get bytecode of end except
+        getCommandcodeEND(self)
+        get commandcode of end except
         :return:
         """
-        bytecode = "ENDEXCEPT)"    # bytecode
-        return bytecode
+        commandcode = "ENDEXCEPT)"    # commandcode
+        return commandcode
 
 
 if __name__ == '__main__':
     # unit test
     except_ = FrogEXCEPT("StackOverflow")
-    print(except_.getBytecodeBegin())
-    print(except_.getBytecodeEND())
+    print(except_.getCommandcodeBegin())
+    print(except_.getCommandcodeEND())

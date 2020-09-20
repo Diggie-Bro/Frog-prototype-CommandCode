@@ -17,17 +17,17 @@ class DOT:
     def __init__(self, pipeline: list):
         self.pipeline = pipeline
 
-    def getBytecode(self):
+    def getCommandcode(self):
         """
-        getBytecode(self)
-        get bytecode of dot expr
+        getCommandcode(self)
+        get commandcode of dot expr
         :return:
         """
-        bytecode = "DOT ({})".format(".".join([str(e) for e in self.pipeline]))  # bytecode
-        return bytecode
+        commandcode = "DOT ({})".format(".".join([str(e) for e in self.pipeline]))  # commandcode
+        return commandcode
 
 
 if __name__ == '__main__':
     # unit test
     dot_ = DOT(["objectname", "foo()"])
-    print(dot_.getBytecode())
+    print(dot_.getCommandcode())

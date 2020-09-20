@@ -14,28 +14,28 @@ class FrogMAIN:
     def __init__(self):
         pass
 
-    def getBytecodeBegin(self):
+    def getCommandcodeBegin(self):
         """
-        getBytecodeBegin(self)
-        get bytecode of begin main
+        getCommandcodeBegin(self)
+        get commandcode of begin main
         :return:
         """
-        bytecode = "(BEGINMAIN"    # bytecode
-        return bytecode
+        commandcode = "(BEGINMAIN"    # commandcode
+        return commandcode
 
-    def getBytecodeEnd(self):
+    def getCommandcodeEnd(self):
         """
-        getBytecodeEnd(self)
-        get bytecode of end main
+        getCommandcodeEnd(self)
+        get commandcode of end main
         :return:
         """
-        bytecode = "ENDMAIN)"    # bytecode
-        return bytecode
+        commandcode = "ENDMAIN)"    # commandcode
+        return commandcode
 
 
 if __name__ == '__main__':
     # unit test
     main_ = FrogMAIN()
-    print(main_.getBytecodeBegin())
-    print(main_.getBytecodeEnd())
+    print(main_.getCommandcodeBegin())
+    print(main_.getCommandcodeEnd())
 

@@ -18,17 +18,17 @@ class CALLFUNC:
         self.funcname = funcname
         self.param = param
 
-    def getBytecode(self):
+    def getCommandcode(self):
         """
-        getBytecode(self)
-        get bytecode of function calling
+        getCommandcode(self)
+        get commandcode of function calling
         :return:
         """
-        bytecode = "CALL ({funcname})({param})".format(funcname=self.funcname, param=",".join([str(e) for e in self.param]))   # bytecode
-        return bytecode
+        commandcode = "CALL ({funcname})({param})".format(funcname=self.funcname, param=",".join([str(e) for e in self.param]))   # commandcode
+        return commandcode
 
 
 if __name__ == '__main__':
     # unit test
     assign_ = CALLFUNC("print", ["hello, world!"])
-    print(assign_.getBytecode())
+    print(assign_.getCommandcode())

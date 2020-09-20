@@ -15,28 +15,28 @@ class FrogFUNC:
         self.param = param
         self.funcname = funcname
 
-    def getBytecodeBegin(self):
+    def getCommandcodeBegin(self):
         """
-        getBytecodeBegin(self)
-        get bytecode of begin func
+        getCommandcodeBegin(self)
+        get commandcode of begin func
         :return:
         """
-        bytecode = "(BEGINFUNC ({funcname}<={param})".format(funcname=self.funcname, param=' '.join([str(e) for e in self.param]))    # bytecode
-        return bytecode
+        commandcode = "(BEGINFUNC ({funcname}<={param})".format(funcname=self.funcname, param=' '.join([str(e) for e in self.param]))    # commandcode
+        return commandcode
 
-    def getBytecodeEND(self):
+    def getCommandcodeEND(self):
         """
-        getBytecodeEND(self)
-        get bytecode of end func
+        getCommandcodeEND(self)
+        get commandcode of end func
         :return:
         """
-        bytecode = "ENDFUNC)".format(self.param)    # bytecode
-        return bytecode
+        commandcode = "ENDFUNC)".format(self.param)    # commandcode
+        return commandcode
 
 
 if __name__ == '__main__':
     # unit test
     func_ = FrogFUNC("func", ["foo", "boo"])
-    print(func_.getBytecodeBegin())
-    print(func_.getBytecodeEND())
+    print(func_.getCommandcodeBegin())
+    print(func_.getCommandcodeEND())
 

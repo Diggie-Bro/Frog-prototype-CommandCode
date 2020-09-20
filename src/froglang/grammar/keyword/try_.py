@@ -14,27 +14,27 @@ class FrogTRY:
     def __init__(self):
         pass
 
-    def getBytecodeBegin(self):
+    def getCommandcodeBegin(self):
         """
-        getBytecodeBegin(self)
-        get bytecode of begin try
+        getCommandcodeBegin(self)
+        get commandcode of begin try
         :return:
         """
-        bytecode = "(BEGINTRY"    # bytecode
-        return bytecode
+        commandcode = "(BEGINTRY"    # commandcode
+        return commandcode
 
-    def getBytecodeEND(self):
+    def getCommandcodeEND(self):
         """
-        getBytecodeEND(self)
-        get bytecode of end try
+        getCommandcodeEND(self)
+        get commandcode of end try
         :return:
         """
-        bytecode = "ENDTRY)"    # bytecode
-        return bytecode
+        commandcode = "ENDTRY)"    # commandcode
+        return commandcode
 
 
 if __name__ == '__main__':
     # unit test
     try_ = FrogTRY()
-    print(try_.getBytecodeBegin())
-    print(try_.getBytecodeEND())
+    print(try_.getCommandcodeBegin())
+    print(try_.getCommandcodeEND())

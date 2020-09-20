@@ -19,18 +19,18 @@ class ASSIGN:
         self.val = val
         self.operand = operand
 
-    def getBytecode(self):
+    def getCommandcode(self):
         """
-        getBytecode(self)
-        get bytecode of assign
+        getCommandcode(self)
+        get commandcode of assign
         :return:
         """
-        bytecode = "ASSIGN ({name})({operand})".format(name=self.name, operand=(
-            self.val if self.val is not None else self.operand))    # bytecode
-        return bytecode
+        commandcode = "ASSIGN ({name})({operand})".format(name=self.name, operand=(
+            self.val if self.val is not None else self.operand))    # commandcode
+        return commandcode
 
 
 if __name__ == '__main__':
     # unit test
     assign_ = ASSIGN("foo", 36)
-    print(assign_.getBytecode())
+    print(assign_.getCommandcode())

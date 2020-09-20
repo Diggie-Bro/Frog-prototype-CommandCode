@@ -19,29 +19,29 @@ class RANGE:
         self.val = val
         self.operand = operand
 
-    def getBytecodeDotDotDot(self):  # ...
+    def getCommandcodeDotDotDot(self):  # ...
         """
-        getBytecodeDotDotDot(self)
-        get bytecode of range (...)
+        getCommandcodeDotDotDot(self)
+        get commandcode of range (...)
         :return:
         """
-        bytecode = "RANGECLOSED ({name})({operand})".format(name=self.name, operand=(
-            self.val if self.val is not None else self.operand))  # bytecode
-        return bytecode
+        commandcode = "RANGECLOSED ({name})({operand})".format(name=self.name, operand=(
+            self.val if self.val is not None else self.operand))  # commandcode
+        return commandcode
 
-    def getBytecodeDotDotBig(self):  # ..<
+    def getCommandcodeDotDotBig(self):  # ..<
         """
-        getBytecodeDotDotBig(self)
-        get bytecode of range (..<)
+        getCommandcodeDotDotBig(self)
+        get commandcode of range (..<)
         :return:
         """
-        bytecode = "RANGEOPENED ({name})({operand})".format(name=self.name, operand=(
-            self.val if self.val is not None else self.operand))  # bytecode
-        return bytecode
+        commandcode = "RANGEOPENED ({name})({operand})".format(name=self.name, operand=(
+            self.val if self.val is not None else self.operand))  # commandcode
+        return commandcode
 
 
 if __name__ == '__main__':
     # unit test
     range_ = RANGE("foo", 36)
-    print(range_.getBytecodeDotDotDot())
-    print(range_.getBytecodeDotDotBig())
+    print(range_.getCommandcodeDotDotDot())
+    print(range_.getCommandcodeDotDotBig())

@@ -14,17 +14,17 @@ class FrogIMPORT:
     def __init__(self, module_name: str):
         self.module_name = module_name
 
-    def getBytecode(self):
+    def getCommandcode(self):
         """
-        getBytecode(self)
-        get bytecode of import
+        getCommandcode(self)
+        get commandcode of import
         :return:
         """
-        bytecode = "IMPORT ({})".format(self.module_name)    # bytecode
-        return bytecode
+        commandcode = "IMPORT ({})".format(self.module_name)    # commandcode
+        return commandcode
 
 
 if __name__ == '__main__':
     # unit test
     import_ = FrogIMPORT("io")
-    print(import_.getBytecode())
+    print(import_.getCommandcode())

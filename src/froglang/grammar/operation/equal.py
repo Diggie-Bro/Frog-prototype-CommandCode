@@ -21,15 +21,15 @@ class EQUAL:
         self.val = val
         self.operand = operand
 
-    def getBytecode(self):
+    def getCommandcode(self):
         """
-        getBytecodeBegin(self)
-        get bytecode of equal
+        getCommandcodeBegin(self)
+        get commandcode of equal
         :return:
         """
-        bytecode = "EQUAL ({name})({operand})".format(name=self.name, operand=(
-            self.val if self.val is not None else self.operand))    # bytecode
-        return bytecode
+        commandcode = "EQUAL ({name})({operand})".format(name=self.name, operand=(
+            self.val if self.val is not None else self.operand))    # commandcode
+        return commandcode
 
 
 class NOTEQUAL:
@@ -45,21 +45,21 @@ class NOTEQUAL:
         self.val = val
         self.operand = operand
 
-    def getBytecode(self):
+    def getCommandcode(self):
         """
-        getBytecode(self)
-        get bytecode of notequal
+        getCommandcode(self)
+        get commandcode of notequal
         :return:
         """
-        bytecode = "NOTEQUAL ({name})({operand})".format(name=self.name, operand=(
-            self.val if self.val is not None else self.operand))    # bytecode
-        return bytecode
+        commandcode = "NOTEQUAL ({name})({operand})".format(name=self.name, operand=(
+            self.val if self.val is not None else self.operand))    # commandcode
+        return commandcode
 
 
 if __name__ == '__main__':
     # unit test
     equal_ = EQUAL("foo", 36)
-    print(equal_.getBytecode())
+    print(equal_.getCommandcode())
     notequal_ = NOTEQUAL("foo", "boo")
-    print(notequal_.getBytecode())
+    print(notequal_.getCommandcode())
 

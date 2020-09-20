@@ -14,27 +14,27 @@ class FrogELSE:
     def __init__(self):
         pass
 
-    def getBytecodeBegin(self):
+    def getCommandcodeBegin(self):
         """
-        getBytecodeBegin(self)
-        get bytecode of begin else
+        getCommandcodeBegin(self)
+        get commandcode of begin else
         :return:
         """
-        bytecode = "(BEGINELSE"    # bytecode
-        return bytecode
+        commandcode = "(BEGINELSE"    # commandcode
+        return commandcode
 
-    def getBytecodeEND(self):
+    def getCommandcodeEND(self):
         """
-        getBytecodeEND(self)
-        get bytecode of end else
+        getCommandcodeEND(self)
+        get commandcode of end else
         :return:
         """
-        bytecode = "ENDELSE)"    # bytecode
-        return bytecode
+        commandcode = "ENDELSE)"    # commandcode
+        return commandcode
 
 
 if __name__ == '__main__':
     # unit test
     else_ = FrogELSE()
-    print(else_.getBytecodeBegin())
-    print(else_.getBytecodeEND())
+    print(else_.getCommandcodeBegin())
+    print(else_.getCommandcodeEND())

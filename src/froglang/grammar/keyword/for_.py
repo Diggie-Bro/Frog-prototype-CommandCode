@@ -14,28 +14,27 @@ class FrogFOR:
     def __init__(self, statement: str):
         self.statement = statement
 
-    def getBytecodeBegin(self):
+    def getCommandcodeBegin(self):
         """
-        getBytecodeBegin(self)
-        get bytecode of begin for
+        getCommandcodeBegin(self)
+        get commandcode of begin for
         :return:
         """
-        bytecode = "(BEGINFOR ({})".format(self.statement)    # bytecode
-        return bytecode
+        commandcode = "(BEGINFOR ({})".format(self.statement)    # commandcode
+        return commandcode
 
-    def getBytecodeEND(self):
+    def getCommandcodeEND(self):
         """
-        getBytecodeEND(self)
-        get bytecode of end for
+        getCommandcodeEND(self)
+        get commandcode of end for
         :return:
         """
-        bytecode = "ENDFOR)".format(self.statement)    # bytecode
-        return bytecode
+        commandcode = "ENDFOR)".format(self.statement)    # commandcode
+        return commandcode
 
 
 if __name__ == '__main__':
     # unit test
     for_ = FrogFOR("foo > boo")
-    print(for_.getBytecodeBegin())
-    print(for_.getBytecodeEND())
-
+    print(for_.getCommandcodeBegin())
+    print(for_.getCommandcodeEND())

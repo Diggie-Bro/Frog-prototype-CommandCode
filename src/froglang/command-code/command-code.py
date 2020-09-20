@@ -1,6 +1,6 @@
 """
-parser.py
-The Frog Programming Language Official Parser
+command-code.py
+The Frog Programming Language Official Commandcode converter
 
 Development Leader: @RedoC
 """
@@ -10,9 +10,9 @@ import src.froglang.grammar.operations as oper
 import src.froglang.grammar.keywords as keywd
 
 
-class Parser:
+class CommandCoder:
     """
-    class Parser parse frogcode to bytecode
+    class CommandCoder convert frogcode to commandcode
     """
 
     def __init__(self, linecode: str, bracketlist: list):
@@ -28,7 +28,7 @@ class Parser:
         """
         self.parse()
         parsing main method
-        :return bytecode:
+        :return commandcode:
         """
 
         splited_code = self.linecode.split(" ")
@@ -38,7 +38,9 @@ class Parser:
         # keyword check
         keyword = keywd.getKeyword(splited_code)
 
-        if keyword is not None: temp.remove(keyword)
+        if keyword is not None:
+            temp.remove(keyword)
+
         # keyword ability check
         if keywd.getKeyword(temp) is not None:
             # :TODO MultiKeywordError handle
@@ -51,7 +53,7 @@ class Parser:
         > bracket check
         > grammar check
         > operation convert
-        > make bytecode
+        > make commandcode
         """
         if keyword == keywd.keywordList[0]:  # import
             if len(splited_code) != 2:
@@ -59,8 +61,8 @@ class Parser:
                 pass
             grammar_class = keywd.keywordClassList[0]
             if splited_code.index(keyword) == 0:
-                bytecode = grammar_class(splited_code[1]).getBytecode()
-                return bytecode
+                commandcode = grammar_class(splited_code[1]).getcommandcode()
+                return commandcode
 
             # :TODO GrammarError handle
         if keyword == keywd.keywordList[1]:  # main
@@ -69,9 +71,9 @@ class Parser:
                 pass
             grammar_class = keywd.keywordClassList[1]
             if splited_code.index(keyword) == 0 and splited_code[1] == '{':
-                bytecode = grammar_class().getBytecodeBegin()
+                commandcode = grammar_class().getcommandcodeBegin()
                 self.bracketlist.append("main")
-                return bytecode
+                return commandcode
 
         if keyword == keywd.keywordList[2]:  # func
             pass
@@ -98,7 +100,7 @@ class Parser:
 
 
 if __name__ == '__main__':
-    parser = Parser("import io", [])
+    parser = CommandCoder("import io", [])
     print(parser.parse())
-    parser2 = Parser("main{", [])
+    parser2 = CommandCoder("main{", [])
     print(parser2.parse())

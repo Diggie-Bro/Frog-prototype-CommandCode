@@ -15,17 +15,17 @@ class FrogCONST:
         self.name = name
         self.init = init
 
-    def getBytecode(self):
+    def getCommandcode(self):
         """
-        getBytecodeBegin(self)
-        get bytecode of begin const
+        getCommandcodeBegin(self)
+        get commandcode of begin const
         :return:
         """
-        bytecode = "CONST ({name})({init})".format(name=self.name, init=self.init)    # bytecode
-        return bytecode
+        commandcode = "CONST ({name})({init})".format(name=self.name, init=self.init)    # commandcode
+        return commandcode
 
 
 if __name__ == '__main__':
     # unit test
     const_ = FrogCONST("foo", 36)
-    print(const_.getBytecode())
+    print(const_.getCommandcode())

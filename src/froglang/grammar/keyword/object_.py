@@ -14,28 +14,28 @@ class FrogOBJECT:
     def __init__(self, name: str):
         self.name = name
 
-    def getBytecodeBegin(self):
+    def getCommandcodeBegin(self):
         """
-        getBytecodeBegin(self)
-        get bytecode of begin object
+        getCommandcodeBegin(self)
+        get commandcode of begin object
         :return:
         """
-        bytecode = "(BEGINOBJECT ({})".format(self.name)    # bytecode
-        return bytecode
+        commandcode = "(BEGINOBJECT ({})".format(self.name)    # commandcode
+        return commandcode
 
-    def getBytecodeEND(self):
+    def getCommandcodeEND(self):
         """
-        getBytecodeEND(self)
-        get bytecode of end object
+        getCommandcodeEND(self)
+        get commandcode of end object
         :return:
         """
-        bytecode = "ENDOBJECT)"    # bytecode
-        return bytecode
+        commandcode = "ENDOBJECT)"    # commandcode
+        return commandcode
 
 
 if __name__ == '__main__':
     # unit test
     object_ = FrogOBJECT("foo")
-    print(object_.getBytecodeBegin())
-    print(object_.getBytecodeEND())
+    print(object_.getCommandcodeBegin())
+    print(object_.getCommandcodeEND())
 

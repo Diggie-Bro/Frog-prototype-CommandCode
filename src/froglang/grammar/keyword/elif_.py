@@ -14,28 +14,27 @@ class FrogELIF:
     def __init__(self, statement: str):
         self.statement = statement
 
-    def getBytecodeBegin(self):
+    def getCommandcodeBegin(self):
         """
-        getBytecodeBegin(self)
-        get bytecode of begin elif
+        getCommandcodeBegin(self)
+        get commandcode of begin elif
         :return:
         """
-        bytecode = "(BEGINELIF ({})".format(self.statement)    # bytecode
-        return bytecode
+        commandcode = "(BEGINELIF ({})".format(self.statement)    # commandcode
+        return commandcode
 
-    def getBytecodeEND(self):
+    def getCommandcodeEND(self):
         """
-        getBytecodeEND(self)
-        get bytecode of end elif
+        getCommandcodeEND(self)
+        get commandcode of end elif
         :return:
         """
-        bytecode = "ENDELIF)".format(self.statement)    # bytecode
-        return bytecode
+        commandcode = "ENDELIF)".format(self.statement)    # commandcode
+        return commandcode
 
 
 if __name__ == '__main__':
     # unit test
     elif_ = FrogELIF("foo > boo")
-    print(elif_.getBytecodeBegin())
-    print(elif_.getBytecodeEND())
-
+    print(elif_.getCommandcodeBegin())
+    print(elif_.getCommandcodeEND())

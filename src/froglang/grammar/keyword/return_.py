@@ -14,18 +14,18 @@ class FrogRETURN:
     def __init__(self, value: str):
         self.value = value
 
-    def getBytecode(self):
+    def getCommandcode(self):
         """
-        getBytecode(self)
-        get bytecode of return
+        getCommandcode(self)
+        get commandcode of return
         :return:
         """
-        bytecode = "RETURN ({})".format(self.value)    # bytecode
-        return bytecode
+        commandcode = "RETURN ({})".format(self.value)    # commandcode
+        return commandcode
 
 
 if __name__ == '__main__':
     # unit test
     return_ = FrogRETURN("result")
-    print(return_.getBytecode())
+    print(return_.getCommandcode())
 

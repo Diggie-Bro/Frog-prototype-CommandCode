@@ -15,17 +15,17 @@ class FrogVAR:
         self.name = name
         self.init = init
 
-    def getBytecode(self):
+    def getCommandcode(self):
         """
-        getBytecode(self)
-        get bytecode of var
+        getCommandcode(self)
+        get commandcode of var
         :return:
         """
-        bytecode = "VAR ({name})({init})".format(name=self.name, init=self.init)    # bytecode
-        return bytecode
+        commandcode = "VAR ({name})({init})".format(name=self.name, init=self.init)    # commandcode
+        return commandcode
 
 
 if __name__ == '__main__':
     # unit test
     var = FrogVAR("foo", 36)
-    print(var.getBytecode())
+    print(var.getCommandcode())

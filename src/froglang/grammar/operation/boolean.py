@@ -18,14 +18,14 @@ class AND:
         self.state1 = state1
         self.state2 = state2
 
-    def getBytecode(self):
+    def getCommandcode(self):
         """
-        getBytecodeBegin(self)
-        get bytecode of and
+        getCommandcodeBegin(self)
+        get commandcode of and
         :return:
         """
-        bytecode = "AND ({s1})({s2})".format(s1=self.state1, s2=self.state2)    # bytecode
-        return bytecode
+        commandcode = "AND ({s1})({s2})".format(s1=self.state1, s2=self.state2)    # commandcode
+        return commandcode
 
 
 class OR:
@@ -40,14 +40,14 @@ class OR:
         self.state1 = state1
         self.state2 = state2
 
-    def getBytecode(self):
+    def getCommandcode(self):
         """
-        getBytecodeBegin(self)
-        get bytecode of or
+        getCommandcodeBegin(self)
+        get commandcode of or
         :return:
         """
-        bytecode = "OR ({s1})({s2})".format(s1=self.state1, s2=self.state2)    # bytecode
-        return bytecode
+        commandcode = "OR ({s1})({s2})".format(s1=self.state1, s2=self.state2)    # commandcode
+        return commandcode
 
 
 class NOT:
@@ -61,22 +61,22 @@ class NOT:
     def __init__(self, state: str):
         self.state = state
 
-    def getBytecode(self):
+    def getCommandcode(self):
         """
-        getBytecodeBegin(self)
-        get bytecode of not
+        getCommandcodeBegin(self)
+        get commandcode of not
         :return:
         """
-        bytecode = "NOT ({})".format(self.state)    # bytecode
-        return bytecode
+        commandcode = "NOT ({})".format(self.state)    # commandcode
+        return commandcode
 
 
 if __name__ == '__main__':
     # unit test
     and_ = AND("foo", "36 > 50")
-    print(and_.getBytecode())
+    print(and_.getCommandcode())
     or_ = OR("90 == 90", "50 < 100")
-    print(or_.getBytecode())
-    not_ = NOT(or_.getBytecode())
-    print(not_.getBytecode())
+    print(or_.getCommandcode())
+    not_ = NOT(or_.getCommandcode())
+    print(not_.getCommandcode())
 

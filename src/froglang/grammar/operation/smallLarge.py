@@ -19,15 +19,15 @@ class LARGE:
         self.val = val
         self.operand = operand
 
-    def getBytecode(self):
+    def getCommandcode(self):
         """
-        getBytecodeBegin(self)
-        get bytecode of large expr
+        getCommandcodeBegin(self)
+        get commandcode of large expr
         :return:
         """
-        bytecode = "LARGE ({name})({operand})".format(name=self.name, operand=(
-            self.val if self.val is not None else self.operand))    # bytecode
-        return bytecode
+        commandcode = "LARGE ({name})({operand})".format(name=self.name, operand=(
+            self.val if self.val is not None else self.operand))    # commandcode
+        return commandcode
 
 
 class LARGEEQUAL:
@@ -43,15 +43,15 @@ class LARGEEQUAL:
         self.val = val
         self.operand = operand
 
-    def getBytecode(self):
+    def getCommandcode(self):
         """
-        getBytecode(self)
-        get bytecode of large or equal expr
+        getCommandcode(self)
+        get commandcode of large or equal expr
         :return:
         """
-        bytecode = "NOTEQUAL ({name})({operand})".format(name=self.name, operand=(
-            self.val if self.val is not None else self.operand))    # bytecode
-        return bytecode
+        commandcode = "NOTEQUAL ({name})({operand})".format(name=self.name, operand=(
+            self.val if self.val is not None else self.operand))    # commandcode
+        return commandcode
 
 
 class SMALL:
@@ -67,15 +67,15 @@ class SMALL:
         self.val = val
         self.operand = operand
 
-    def getBytecode(self):
+    def getCommandcode(self):
         """
-        getBytecodeBegin(self)
-        get bytecode of small expr
+        getCommandcodeBegin(self)
+        get commandcode of small expr
         :return:
         """
-        bytecode = "SMALL ({name})({operand})".format(name=self.name, operand=(
-            self.val if self.val is not None else self.operand))    # bytecode
-        return bytecode
+        commandcode = "SMALL ({name})({operand})".format(name=self.name, operand=(
+            self.val if self.val is not None else self.operand))    # commandcode
+        return commandcode
 
 
 class SMALLEQUAL:
@@ -91,27 +91,27 @@ class SMALLEQUAL:
         self.val = val
         self.operand = operand
 
-    def getBytecode(self):
+    def getCommandcode(self):
         """
-        getBytecode(self)
-        get bytecode of small or equal expr
+        getCommandcode(self)
+        get commandcode of small or equal expr
         :return:
         """
-        bytecode = "SMALLEQUAL ({name})({operand})".format(name=self.name, operand=(
-            self.val if self.val is not None else self.operand))    # bytecode
-        return bytecode
+        commandcode = "SMALLEQUAL ({name})({operand})".format(name=self.name, operand=(
+            self.val if self.val is not None else self.operand))    # commandcode
+        return commandcode
 
 
 if __name__ == '__main__':
     # unit test
     large_ = LARGE("foo", "32")
-    print(large_.getBytecode())
+    print(large_.getCommandcode())
 
     largeequal_ = LARGEEQUAL("32 + 5", "64 + 9")
-    print(largeequal_.getBytecode())
+    print(largeequal_.getCommandcode())
 
     small_ = LARGE("foo", "32")
-    print(small_.getBytecode())
+    print(small_.getCommandcode())
 
     smallequal_ = LARGEEQUAL("32 + 5", "64 + 9")
-    print(smallequal_.getBytecode())
+    print(smallequal_.getCommandcode())

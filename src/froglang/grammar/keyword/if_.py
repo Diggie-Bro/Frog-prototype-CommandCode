@@ -14,28 +14,28 @@ class FrogIF:
     def __init__(self, statement: str):
         self.statement = statement
 
-    def getBytecodeBegin(self):
+    def getCommandcodeBegin(self):
         """
-        getBytecodeBegin(self)
-        get bytecode of begin if
+        getCommandcodeBegin(self)
+        get commandcode of begin if
         :return:
         """
-        bytecode = "(BEGINIF ({})".format(self.statement)    # bytecode
-        return bytecode
+        commandcode = "(BEGINIF ({})".format(self.statement)    # commandcode
+        return commandcode
 
-    def getBytecodeEND(self):
+    def getCommandcodeEND(self):
         """
-        getBytecodeEND(self)
-        get bytecode of end if
+        getCommandcodeEND(self)
+        get commandcode of end if
         :return:
         """
-        bytecode = "ENDIF)".format(self.statement)    # bytecode
-        return bytecode
+        commandcode = "ENDIF)".format(self.statement)    # commandcode
+        return commandcode
 
 
 if __name__ == '__main__':
     # unit test
     if_ = FrogIF("foo > boo")
-    print(if_.getBytecodeBegin())
-    print(if_.getBytecodeEND())
+    print(if_.getCommandcodeBegin())
+    print(if_.getCommandcodeEND())
 
