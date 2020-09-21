@@ -67,6 +67,9 @@ class CommandCoder:
         > grammar check
         > operation convert
         > make commandcode
+        
+        <> : necessary word
+        [] : option
         """
         if keyword == keywd.keywordList[0]:  # import
             """
@@ -99,7 +102,7 @@ class CommandCoder:
 
         if keyword == keywd.keywordList[2]:  # func
             """
-            func <funcname>(<params>) {
+                func <funcname>(<params>) {
             """
 
             splited_code = self.linecode.split(" ")
@@ -119,24 +122,54 @@ class CommandCoder:
                     return commandcode
 
         if keyword == keywd.keywordList[3]:  # object
+            """
+                object <objectname> {
+            """
             pass
         if keyword == keywd.keywordList[4]:  # var
+            """
+                var <objectname> = [init]
+            """
             pass
         if keyword == keywd.keywordList[5]:  # for
+            """
+                for <statement> {
+            """
             pass
         if keyword == keywd.keywordList[6]:  # if
+            """
+                if <statement> {
+            """
             pass
         if keyword == keywd.keywordList[7]:  # try
+            """
+                try {
+            """
             pass
         if keyword == keywd.keywordList[8]:  # except
+            """
+                except [error] {
+            """
             pass
         if keyword == keywd.keywordList[9]:  # const
+            """
+                const <objectname> = <init>
+            """
             pass
         if keyword == keywd.keywordList[10]:  # return
+            """
+                return <value>
+            """
             pass
         if keyword == keywd.keywordList[11]:  # else
+            """
+                else {
+            """
             pass
         if keyword == keywd.keywordList[12]:  # elif
+            """
+                elif <statement> {
+            """
             pass
 
 
