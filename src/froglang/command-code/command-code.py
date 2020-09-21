@@ -25,6 +25,15 @@ class CommandCoder:
         self.linecode = linecode
         self.bracketlist = bracketlist
 
+    def setLinecode(self, linecode: str):
+        """
+        self.setLinecode(linecode)
+        set linecode
+        :param linecode:
+        :return:
+        """
+        self.linecode = linecode
+
     def parse(self):
         """
         self.parse()
@@ -89,17 +98,16 @@ class CommandCoder:
 
             splited_code = self.linecode.split(" ")
 
-            if len(splited_code) != 4:
+            if len(splited_code) != 3:
                 # :TODO GrammmarError handles
                 return
 
             grammar_class = keywd.keywordClassList[2]
-            if splited_code.index(keyword) == 0 and splited_code[3] == '{':
-                if splited_code[2][0] == '(' and splited_code[2][len(list(splited_code[2])) - 1] == ')':
-                    commandcode = grammar_class(splited_code[1],
-                                                splited_code[2][1:len(list(splited_code[2])) - 1].split(","))\
-                                                .getCommandcodeBegin()
-                    self.bracketlist.append("main")
+            if splited_code.index(keyword) == 0 and splited_code[2] == '{':
+                if True:
+                    commandcode = grammar_class(splited_code[1][:list(splited_code[1]).index('(')],
+                                                re.findall(r"\(([^)]+)", splited_code[1])[0].split(',')).getCommandcodeBegin()
+                    self.bracketlist.append("func")
                     return commandcode
 
         if keyword == keywd.keywordList[3]:  # object
@@ -127,7 +135,8 @@ class CommandCoder:
 if __name__ == '__main__':
     parser = CommandCoder("import io", [])
     print(parser.parse())
-    parser2 = CommandCoder("func foo (h1, h2) {", [])
-    print(parser2.parse())
-    parser3 = CommandCoder("main {", [])
-    print(parser3.parse())
+    parser.setLinecode("func foo(h1, h2) {")
+    print(parser.parse())
+    parser.setLinecode("main {")
+    print(parser.parse())
+    print(parser.bracketlist)
