@@ -1,5 +1,9 @@
 import io
 
+func foo(name) {
+print("hello @name")
+}
+
 main {
-    println("Hello, Frog!")
+foo("frog")
 }

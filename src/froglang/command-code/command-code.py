@@ -69,6 +69,9 @@ class CommandCoder:
         > make commandcode
         """
         if keyword == keywd.keywordList[0]:  # import
+            """
+                import <module_name>
+            """
             if len(splited_code) != 2:
                 # :TODO GrammmarError handle
                 return
@@ -80,6 +83,9 @@ class CommandCoder:
 
             # :TODO GrammarError handle
         if keyword == keywd.keywordList[1]:  # main
+            """
+                main {
+            """
             if len(splited_code) != 2:
                 # :TODO GrammmarError handles
                 return
@@ -104,7 +110,9 @@ class CommandCoder:
 
             grammar_class = keywd.keywordClassList[2]
             if splited_code.index(keyword) == 0 and splited_code[2] == '{':
-                if True:
+                if '(' in splited_code[1] and ')' in splited_code[1] \
+                        and list(splited_code[1]).count('(') == 1 and list(splited_code[1]).count(')') == 1 \
+                        and splited_code[1].index('(') < splited_code[1].index(')'):
                     commandcode = grammar_class(splited_code[1][:list(splited_code[1]).index('(')],
                                                 re.findall(r"\(([^)]+)", splited_code[1])[0].split(',')).getCommandcodeBegin()
                     self.bracketlist.append("func")
@@ -132,11 +140,11 @@ class CommandCoder:
             pass
 
 
+# unit test
 if __name__ == '__main__':
-    parser = CommandCoder("import io", [])
-    print(parser.parse())
-    parser.setLinecode("func foo(h1, h2) {")
-    print(parser.parse())
-    parser.setLinecode("main {")
-    print(parser.parse())
-    print(parser.bracketlist)
+    parser = CommandCoder("", [])
+    with open("../prototype/hello_world") as f:
+        codes = f.readlines()
+        for code in codes:
+            parser.setLinecode(code[:-1])
+            print(parser.parse())
