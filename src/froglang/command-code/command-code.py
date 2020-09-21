@@ -40,6 +40,10 @@ class CommandCoder:
         parsing main method
         :return commandcode:
         """
+        # code optimization
+        parens = re.findall(r"\(([^)]+)", self.linecode)
+        for i in range(len(parens)):
+            self.linecode = self.linecode.replace(parens[i], parens[i].replace(" ", ""))
 
         splited_code = self.linecode.split(" ")
         temp = copy.deepcopy(splited_code)
@@ -89,12 +93,8 @@ class CommandCoder:
 
         if keyword == keywd.keywordList[2]:  # func
             """
-            func <funcname> (<params>) {
+            func <funcname>(<params>) {
             """
-            # code optimization
-            parens = re.findall(r"\(([^)]+)", self.linecode)
-            for i in range(len(parens)):
-                self.linecode = self.linecode.replace(parens[i], parens[i].replace(" ", ""))
 
             splited_code = self.linecode.split(" ")
 
