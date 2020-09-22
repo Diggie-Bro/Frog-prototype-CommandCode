@@ -1,9 +1,10 @@
 import io
 
 func foo(name) {
-print("hello @name")
+    print("hello @name")
 }
 
 main {
-foo("frog")
+    var name = "frog"
+    foo(name)
 }
