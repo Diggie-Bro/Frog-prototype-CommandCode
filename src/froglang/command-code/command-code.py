@@ -41,6 +41,8 @@ class CommandCoder:
         :return commandcode:
         """
         # code optimization
+
+        self.linecode = self.linecode.strip()
         parens = re.findall(r"\(([^)]+)", self.linecode)
         for i in range(len(parens)):
             self.linecode = self.linecode.replace(parens[i], parens[i].replace(" ", ""))
@@ -85,7 +87,7 @@ class CommandCoder:
                 return commandcode
 
             # :TODO GrammarError handle
-        if keyword == keywd.keywordList[1]:  # main
+        elif keyword == keywd.keywordList[1]:  # main
             """
                 main {
             """
@@ -100,12 +102,10 @@ class CommandCoder:
                 return commandcode
             # :TODO GrammmarError handles
 
-        if keyword == keywd.keywordList[2]:  # func
+        elif keyword == keywd.keywordList[2]:  # func
             """
                 func <funcname>(<params>) {
             """
-
-            splited_code = self.linecode.split(" ")
 
             if len(splited_code) != 3:
                 # :TODO GrammmarError handles
@@ -120,57 +120,78 @@ class CommandCoder:
                                                 re.findall(r"\(([^)]+)", splited_code[1])[0].split(',')).getCommandcodeBegin()
                     self.bracketlist.append("func")
                     return commandcode
+            # :TODO GrammmarError handles
 
-        if keyword == keywd.keywordList[3]:  # object
+        elif keyword == keywd.keywordList[3]:  # object
             """
                 object <objectname> {
             """
-            pass
-        if keyword == keywd.keywordList[4]:  # var
+            if len(splited_code) != 3:
+                # :TODO GrammmarError handles
+                return
+
+            grammar_class = keywd.keywordClassList[3]
+            if splited_code.index(keyword) == 0 and splited_code[2] == '{':
+                commandcode = grammar_class(splited_code[1]).getCommandcodeBegin()
+                self.bracketlist.append("object")
+                return commandcode
+            # :TODO GrammmarError handles
+        elif keyword == keywd.keywordList[4]:  # var
             """
                 var <objectname> = [init]
             """
             pass
-        if keyword == keywd.keywordList[5]:  # for
+        elif keyword == keywd.keywordList[5]:  # for
             """
                 for <statement> {
             """
             pass
-        if keyword == keywd.keywordList[6]:  # if
+        elif keyword == keywd.keywordList[6]:  # if
             """
                 if <statement> {
             """
             pass
-        if keyword == keywd.keywordList[7]:  # try
+        elif keyword == keywd.keywordList[7]:  # try
             """
                 try {
             """
             pass
-        if keyword == keywd.keywordList[8]:  # except
+        elif keyword == keywd.keywordList[8]:  # except
             """
                 except [error] {
             """
             pass
-        if keyword == keywd.keywordList[9]:  # const
+        elif keyword == keywd.keywordList[9]:  # const
             """
                 const <objectname> = <init>
             """
             pass
-        if keyword == keywd.keywordList[10]:  # return
+        elif keyword == keywd.keywordList[10]:  # return
             """
                 return <value>
             """
             pass
-        if keyword == keywd.keywordList[11]:  # else
+        elif keyword == keywd.keywordList[11]:  # else
             """
                 else {
             """
             pass
-        if keyword == keywd.keywordList[12]:  # elif
+        elif keyword == keywd.keywordList[12]:  # elif
             """
                 elif <statement> {
             """
             pass
+        elif len(splited_code) == 1 and splited_code[0] == '}':  # end of bracket
+            ended_keywd = self.bracketlist.pop()
+            if ended_keywd == "main":
+                commandcode = keywd.mainfunc_.FrogMAIN()
+                return commandcode.getCommandcodeEnd()
+            elif ended_keywd == "func":
+                commandcode = keywd.func_.FrogFUNC("", [])
+                return commandcode.getCommandcodeEND()
+            elif ended_keywd == "object":
+                commandcode = keywd.object_.FrogOBJECT("")
+                return commandcode.getCommandcodeEND()
 
 
 # unit test
@@ -179,5 +200,5 @@ if __name__ == '__main__':
     with open("../prototype/hello_world") as f:
         codes = f.readlines()
         for code in codes:
-            parser.setLinecode(code[:-1])
+            parser.setLinecode(code)
             print(parser.parse())
