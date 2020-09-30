@@ -1,10 +1,12 @@
 import io
 
-func foo(name) {
-    print("hello @name")
+func foo(name, count) {
+    for (1...count) {
+        print("hello @name")
+    }
 }
 
 main {
     var name = "frog"
-    foo(name)
+    foo(name, 3)
 }
