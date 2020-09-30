@@ -25,4 +25,6 @@ We don't support build yet. Please wait new release.
 
 ## Contributing
 DiggieBro is the team with just two junior developers. **We are welcome** for your contributing.
-Please visit [contributing guide](./CONTRIBUTING.md)
+Please visit [contributing guide](./CONTRIBUTING.md)  
+  
+If you use Youtrack, please visit [our youtrack project](https://diggiebro.myjetbrains.com/youtrack/projects/64edbc47-d78c-4869-8b43-54d080271c77)
