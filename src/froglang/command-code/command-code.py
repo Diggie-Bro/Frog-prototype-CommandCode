@@ -45,7 +45,14 @@ class CommandCoder:
         self.linecode = self.linecode.strip()
         parens = re.findall(r"\(([^)]+)", self.linecode)
         for i in range(len(parens)):
-            self.linecode = self.linecode.replace(parens[i], parens[i].replace(" ", ""))
+            self.linecode = self.linecode.replace(parens[i], parens[i].replace(" ", "\&SPACEPAREN"))
+
+        strings = re.findall(r'["](.*?)["]', self.linecode)
+        for i in range(len(strings)):
+            self.linecode = self.linecode.replace(strings[i], strings[i]
+                                                  .replace(" ", "\&SPACESTR")
+                                                  .replace("\&SPACEPAREN", "\&SPACESTR")
+                                                  )
 
         splited_code = self.linecode.split(" ")
         temp = copy.deepcopy(splited_code)
@@ -116,8 +123,10 @@ class CommandCoder:
                 if '(' in splited_code[1] and ')' in splited_code[1] \
                         and list(splited_code[1]).count('(') == 1 and list(splited_code[1]).count(')') == 1 \
                         and splited_code[1].index('(') < splited_code[1].index(')'):
+                    splited_code = [code_snipet.replace("\&SPACEPAREN", "") for code_snipet in splited_code]
                     commandcode = grammar_class(splited_code[1][:list(splited_code[1]).index('(')],
-                                                re.findall(r"\(([^)]+)", splited_code[1])[0].split(',')).getCommandcodeBegin()
+                                                re.findall(r"\(([^)]+)", splited_code[1])[0].split(
+                                                    ',')).getCommandcodeBegin()
                     self.bracketlist.append("func")
                     return commandcode
             # :TODO GrammmarError handles
@@ -138,9 +147,17 @@ class CommandCoder:
             # :TODO GrammmarError handles
         elif keyword == keywd.keywordList[4]:  # var
             """
-                var <objectname> = [init]
+                var <objectname> = <init>
             """
-            pass
+            if len(splited_code) < 4:
+                # :TODO GrammmarError handles
+                return
+            # :TODO GrammmarError handles
+            grammar_class = keywd.keywordClassList[4]
+            if splited_code.index(keyword) == 0 and splited_code[2] == '=':
+                commandcode = grammar_class(splited_code[1], ' '.join(splited_code[3:])).getCommandcode()
+                return commandcode
+
         elif keyword == keywd.keywordList[5]:  # for
             """
                 for <statement> {
