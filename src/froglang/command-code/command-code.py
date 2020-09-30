@@ -157,12 +157,27 @@ class CommandCoder:
             if splited_code.index(keyword) == 0 and splited_code[2] == '=':
                 commandcode = grammar_class(splited_code[1], ' '.join(splited_code[3:])).getCommandcode()
                 return commandcode
+        # :TODO GrammmarError handles
 
         elif keyword == keywd.keywordList[5]:  # for
             """
-                for <statement> {
+                for (<statement>) {
             """
-            pass
+            if len(splited_code) != 3:
+                # :TODO GrammmarError handles
+                return
+            grammar_class = keywd.keywordClassList[5]
+            if splited_code.index(keyword) == 0 and splited_code[2] == '{':
+                if '(' in splited_code[1] and ')' in splited_code[1] \
+                        and list(splited_code[1]).count('(') == 1 and list(splited_code[1]).count(')') == 1 \
+                        and splited_code[1].index('(') < splited_code[1].index(')'):
+                    splited_code = [code_snipet.replace("\&SPACEPAREN", "") for code_snipet in splited_code]
+                    commandcode = grammar_class(
+                        re.findall(r"\(([^)]+)", splited_code[1])[0]
+                    ).getCommandcodeBegin()
+                    self.bracketlist.append("for")
+                    return commandcode
+            # :TODO GrammmarError handles
         elif keyword == keywd.keywordList[6]:  # if
             """
                 if <statement> {
@@ -208,6 +223,9 @@ class CommandCoder:
                 return commandcode.getCommandcodeEND()
             elif ended_keywd == "object":
                 commandcode = keywd.object_.FrogOBJECT("")
+                return commandcode.getCommandcodeEND()
+            elif ended_keywd == "for":
+                commandcode = keywd.for_.FrogFOR("")
                 return commandcode.getCommandcodeEND()
 
 
