@@ -1,6 +1,9 @@
 import io
 
-func foo(name, count) {
+func foo(name, count, yes) {
+    if (yes == "yes") {
+        print("yes!")
+    }
     for (1...count) {
         print("hello @name")
     }
@@ -8,5 +11,5 @@ func foo(name, count) {
 
 main {
     var name = "frog"
-    foo(name, 3)
+    foo(name, 3, "yes")
 }

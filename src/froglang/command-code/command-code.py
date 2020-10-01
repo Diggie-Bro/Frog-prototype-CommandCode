@@ -180,18 +180,52 @@ class CommandCoder:
             # :TODO GrammmarError handles
         elif keyword == keywd.keywordList[6]:  # if
             """
-                if <statement> {
+                if (<statement>) {
             """
+            if len(splited_code) != 3:
+                # :TODO GrammmarError handles
+                return
+            grammar_class = keywd.keywordClassList[6]
+            if splited_code.index(keyword) == 0 and splited_code[2] == '{':
+                if '(' in splited_code[1] and ')' in splited_code[1] \
+                        and list(splited_code[1]).count('(') == 1 and list(splited_code[1]).count(')') == 1 \
+                        and splited_code[1].index('(') < splited_code[1].index(')'):
+                    splited_code = [code_snipet.replace("\&SPACEPAREN", "") for code_snipet in splited_code]
+                    commandcode = grammar_class(
+                        re.findall(r"\(([^)]+)", splited_code[1])[0]
+                    ).getCommandcodeBegin()
+                    self.bracketlist.append("if")
+                    return commandcode
+            # :TODO GrammmarError handles
             pass
         elif keyword == keywd.keywordList[7]:  # try
             """
                 try {
             """
-            pass
+            if len(splited_code) != 2:
+                # :TODO GrammmarError handles
+                return
+
+            grammar_class = keywd.keywordClassList[7]
+            if splited_code.index(keyword) == 0 and splited_code[1] == '{':
+                commandcode = grammar_class().getCommandcodeBegin()
+                self.bracketlist.append("try")
+                return commandcode
+            # :TODO GrammmarError handles
         elif keyword == keywd.keywordList[8]:  # except
             """
-                except [error] {
+                except {
             """
+            if len(splited_code) != 2:
+                # :TODO GrammmarError handles
+                return
+
+            grammar_class = keywd.keywordClassList[8]
+            if splited_code.index(keyword) == 0 and splited_code[1] == '{':
+                commandcode = grammar_class().getCommandcodeBegin()
+                self.bracketlist.append("except")
+                return commandcode
+            # :TODO GrammmarError handles
             pass
         elif keyword == keywd.keywordList[9]:  # const
             """
@@ -226,6 +260,15 @@ class CommandCoder:
                 return commandcode.getCommandcodeEND()
             elif ended_keywd == "for":
                 commandcode = keywd.for_.FrogFOR("")
+                return commandcode.getCommandcodeEND()
+            elif ended_keywd == "if":
+                commandcode = keywd.if_.FrogIF("")
+                return commandcode.getCommandcodeEND()
+            elif ended_keywd == "try":
+                commandcode = keywd.try_.FrogTRY()
+                return commandcode.getCommandcodeEND()
+            elif ended_keywd == "except":
+                commandcode = keywd.except_.FrogEXCEPT()
                 return commandcode.getCommandcodeEND()
 
 

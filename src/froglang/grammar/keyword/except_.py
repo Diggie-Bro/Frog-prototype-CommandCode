@@ -11,7 +11,7 @@ class FrogEXCEPT:
     FrogEXCEPT is the grammar class
     """
 
-    def __init__(self, error: str):
+    def __init__(self, error: str = None):
         self.error = error
 
     def getCommandcodeBegin(self):
