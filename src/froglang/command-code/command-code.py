@@ -293,7 +293,6 @@ class CommandCoder:
                         and list(splited_code[1]).count('(') == 1 and list(splited_code[1]).count(')') == 1 \
                         and splited_code[1].index('(') < splited_code[1].index(')'):
                     splited_code = [code_snipet.replace("\&SPACEPAREN", "") for code_snipet in splited_code]
-                    print(re.findall(r"\(([^)]+)", splited_code[1])[0])
                     commandcode = grammar_class(
                         ''.join(list(splited_code[1])[:list(splited_code[1]).index("(")]),
                         re.findall(r"\(([^)]+)", splited_code[1])[0].split(',')
