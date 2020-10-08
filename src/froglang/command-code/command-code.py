@@ -149,7 +149,7 @@ class CommandCoder:
             """
                 var <objectname> = <init>
             """
-            if len(splited_code) < 4:
+            if len(splited_code) != 4:
                 # :TODO GrammmarError handles
                 return
             # :TODO GrammmarError handles
@@ -197,7 +197,7 @@ class CommandCoder:
                     self.bracketlist.append("if")
                     return commandcode
             # :TODO GrammmarError handles
-            pass
+            return
         elif keyword == keywd.keywordList[7]:  # try
             """
                 try {
@@ -226,27 +226,60 @@ class CommandCoder:
                 self.bracketlist.append("except")
                 return commandcode
             # :TODO GrammmarError handles
-            pass
         elif keyword == keywd.keywordList[9]:  # const
             """
                 const <objectname> = <init>
             """
-            pass
+            if len(splited_code) != 4:
+                # :TODO GrammmarError handles
+                return
+            grammar_class = keywd.keywordClassList[9]
+            if splited_code.index(keyword) == 0 and splited_code[2] == '=':
+                commandcode = grammar_class(splited_code[1], ' '.join(splited_code[3:])).getCommandcode()
+                return commandcode
+            # :TODO GrammmarError handles
         elif keyword == keywd.keywordList[10]:  # return
             """
                 return <value>
             """
-            pass
+            if len(splited_code) != 2:
+                # :TODO GrammmarError handles
+                return
+            grammar_class = keywd.keywordClassList[10]
+            if splited_code.index(keyword) == 0:
+                commandcode = grammar_class(splited_code[1]).getCommandcode()
+                return commandcode
+            # :TODO GrammmarError handles
         elif keyword == keywd.keywordList[11]:  # else
             """
                 else {
             """
-            pass
+            if len(splited_code) != 2 or not splited_code.index(keyword) == 0 or not splited_code[1] == "{":
+                # :TODO GrammmarError handles
+                return
+            commandcode = keywd.keywordClassList[11]().getCommandcodeBegin()
+            self.bracketlist.append("else")
+            return commandcode
         elif keyword == keywd.keywordList[12]:  # elif
             """
                 elif <statement> {
             """
-            pass
+            if len(splited_code) != 3:
+                # :TODO GrammmarError handles
+                return
+            grammar_class = keywd.keywordClassList[12]
+            if splited_code.index(keyword) == 0 and splited_code[2] == '{':
+                if '(' in splited_code[1] and ')' in splited_code[1] \
+                        and list(splited_code[1]).count('(') == 1 and list(splited_code[1]).count(')') == 1 \
+                        and splited_code[1].index('(') < splited_code[1].index(')'):
+                    splited_code = [code_snipet.replace("\&SPACEPAREN", "") for code_snipet in splited_code]
+                    commandcode = grammar_class(
+                        re.findall(r"\(([^)]+)", splited_code[1])[0]
+                    ).getCommandcodeBegin()
+                    self.bracketlist.append("elif")
+                    return commandcode
+            # :TODO GrammmarError handles
+            return
         elif len(splited_code) == 1 and splited_code[0] == '}':  # end of bracket
             ended_keywd = self.bracketlist.pop()
             if ended_keywd == "main":
@@ -269,6 +302,12 @@ class CommandCoder:
                 return commandcode.getCommandcodeEND()
             elif ended_keywd == "except":
                 commandcode = keywd.except_.FrogEXCEPT()
+                return commandcode.getCommandcodeEND()
+            elif ended_keywd == "else":
+                commandcode = keywd.else_.FrogELSE()
+                return commandcode.getCommandcodeEND()
+            elif ended_keywd == "elif":
+                commandcode = keywd.elif_.FrogELIF("")
                 return commandcode.getCommandcodeEND()
 
 
