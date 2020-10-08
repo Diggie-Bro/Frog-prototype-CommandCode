@@ -329,9 +329,8 @@ class CommandCoder:
                 commandcode = keywd.elif_.FrogELIF("")
                 return commandcode.getCommandcodeEND()
         else:
-            # non-keyword operations.
-            if "=" in splited_code:
-                pass
+            # :TODO non-keyword operations.
+            pass
 
 
 # unit test
