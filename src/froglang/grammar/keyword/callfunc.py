@@ -1,6 +1,6 @@
 """
 callfunc.py
-The Frog Programming Language Operation: call (func)
+The Frog Programming Language Operation & Keyword: call (func)
 
 Development Leader: @RedoC
 """
@@ -8,10 +8,10 @@ Development Leader: @RedoC
 
 class CALLFUNC:
     """
-    CALLFUNC is the operation class
+    CALLFUNC is the multi class
     >> example
-    foo(boo)
-    print("")
+    run foo(boo)
+    run print("")
     """
 
     def __init__(self, funcname: str, param: list):

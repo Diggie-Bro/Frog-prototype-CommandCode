@@ -18,6 +18,7 @@ import src.froglang.grammar.keyword.const_ as const_
 import src.froglang.grammar.keyword.return_ as return_
 import src.froglang.grammar.keyword.else_ as else_
 import src.froglang.grammar.keyword.elif_ as elif_
+import src.froglang.grammar.keyword.callfunc as cfunc_
 
 # keyword
 keywordList = (
@@ -33,7 +34,8 @@ keywordList = (
     'const',
     'return',
     'else',
-    'elif'
+    'elif',
+    'run'
 )
 
 keywordClassList = (
@@ -49,7 +51,8 @@ keywordClassList = (
     const_.FrogCONST,
     return_.FrogRETURN,
     else_.FrogELSE,
-    elif_.FrogELIF
+    elif_.FrogELIF,
+    cfunc_.CALLFUNC
 )
 
 

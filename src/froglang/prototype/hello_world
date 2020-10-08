@@ -2,18 +2,18 @@ import io
 
 func foo(name, count, yes) {
     if (yes == "yes") {
-        print("yes!")
+        run print("yes!")
     }
     elif (yes == "no") {
-        print("no...")
+        run print("no...")
     }
     for (1...count) {
-        print("hello @name")
+        run print("hello @name")
     }
 }
 
 main {
     var name = "frog"
     const mem = "100kb"
-    foo(name, 3, "yes")
+    run foo(name, 3, "yes")
 }

@@ -280,6 +280,26 @@ class CommandCoder:
                     return commandcode
             # :TODO GrammmarError handles
             return
+        elif keyword == keywd.keywordList[13]:  # run
+            """
+            run <funcname>([param])
+            """
+            if len(splited_code) != 2:
+                # :TODO GrammmarError handles
+                return
+            grammar_class = keywd.keywordClassList[13]
+            if splited_code.index(keyword) == 0:
+                if '(' in splited_code[1] and ')' in splited_code[1] \
+                        and list(splited_code[1]).count('(') == 1 and list(splited_code[1]).count(')') == 1 \
+                        and splited_code[1].index('(') < splited_code[1].index(')'):
+                    splited_code = [code_snipet.replace("\&SPACEPAREN", "") for code_snipet in splited_code]
+                    print(re.findall(r"\(([^)]+)", splited_code[1])[0])
+                    commandcode = grammar_class(
+                        ''.join(list(splited_code[1])[:list(splited_code[1]).index("(")]),
+                        re.findall(r"\(([^)]+)", splited_code[1])[0].split(',')
+                    ).getCommandcode()
+                    return commandcode
+            # :TODO GrammmarError handles
         elif len(splited_code) == 1 and splited_code[0] == '}':  # end of bracket
             ended_keywd = self.bracketlist.pop()
             if ended_keywd == "main":
@@ -309,6 +329,10 @@ class CommandCoder:
             elif ended_keywd == "elif":
                 commandcode = keywd.elif_.FrogELIF("")
                 return commandcode.getCommandcodeEND()
+        else:
+            # non-keyword operations.
+            if "=" in splited_code:
+                pass
 
 
 # unit test
