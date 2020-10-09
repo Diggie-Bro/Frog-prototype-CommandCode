@@ -20,7 +20,7 @@ class FrogELIF:
         get commandcode of begin elif
         :return:
         """
-        commandcode = "(BEGINELIF ({})".format(self.statement)    # commandcode
+        commandcode = "BEGINELIF ({})".format(self.statement)    # commandcode
         return commandcode
 
     def getCommandcodeEND(self):
@@ -29,7 +29,7 @@ class FrogELIF:
         get commandcode of end elif
         :return:
         """
-        commandcode = "ENDELIF)".format(self.statement)    # commandcode
+        commandcode = "ENDELIF".format(self.statement)    # commandcode
         return commandcode
 
 

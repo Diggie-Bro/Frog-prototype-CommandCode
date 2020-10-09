@@ -21,7 +21,7 @@ class FrogFUNC:
         get commandcode of begin func
         :return:
         """
-        commandcode = "(BEGINFUNC ({funcname}<={param})".format(funcname=self.funcname, param=' '.join([str(e) for e in self.param]))    # commandcode
+        commandcode = "BEGINFUNC ({funcname}<={param})".format(funcname=self.funcname, param=' '.join([str(e) for e in self.param]))    # commandcode
         return commandcode
 
     def getCommandcodeEND(self):
@@ -30,7 +30,7 @@ class FrogFUNC:
         get commandcode of end func
         :return:
         """
-        commandcode = "ENDFUNC)".format(self.param)    # commandcode
+        commandcode = "ENDFUNC".format(self.param)    # commandcode
         return commandcode
 
 

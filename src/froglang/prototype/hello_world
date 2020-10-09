@@ -14,6 +14,7 @@ func foo(name, count, yes) {
 
 main {
     var name = "frog"
+    name = "froglang"
     const mem = "100kb"
     run foo(name, 3, "yes")
 }

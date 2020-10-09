@@ -20,7 +20,7 @@ class FrogELSE:
         get commandcode of begin else
         :return:
         """
-        commandcode = "(BEGINELSE"    # commandcode
+        commandcode = "BEGINELSE"    # commandcode
         return commandcode
 
     def getCommandcodeEND(self):
@@ -29,7 +29,7 @@ class FrogELSE:
         get commandcode of end else
         :return:
         """
-        commandcode = "ENDELSE)"    # commandcode
+        commandcode = "ENDELSE"    # commandcode
         return commandcode
 
 

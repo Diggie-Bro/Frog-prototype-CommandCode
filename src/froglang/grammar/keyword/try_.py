@@ -20,7 +20,7 @@ class FrogTRY:
         get commandcode of begin try
         :return:
         """
-        commandcode = "(BEGINTRY"    # commandcode
+        commandcode = "BEGINTRY"    # commandcode
         return commandcode
 
     def getCommandcodeEND(self):
@@ -29,7 +29,7 @@ class FrogTRY:
         get commandcode of end try
         :return:
         """
-        commandcode = "ENDTRY)"    # commandcode
+        commandcode = "ENDTRY"    # commandcode
         return commandcode
 
 

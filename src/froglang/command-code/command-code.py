@@ -34,9 +34,9 @@ class CommandCoder:
         """
         self.linecode = linecode
 
-    def parse(self):
+    def parseKeywd(self):
         """
-        self.parse()
+        self.parseKeywd()
         parsing main method
         :return commandcode:
         """
@@ -330,14 +330,33 @@ class CommandCoder:
                 return commandcode.getCommandcodeEND()
         else:
             # :TODO non-keyword operations.
-            pass
+            if "=" in splited_code:
+                """
+                <operand1> = <operand2>
+                """
+                if len(splited_code) != 3:
+                    # :TODO GrammmarError handles
+                    return
+
+                grammar_class = oper.operationClassList[0]
+                if splited_code.index('=') == 1:
+                    commandcode = grammar_class(splited_code[0], splited_code[2]).getCommandcode()
+                    return commandcode
+
+    def parseDetail(self, l1code):
+        """
+        self.parseDetail(self, l1code)
+        :param l1code
+        parse more detail.
+        """
+        pass
 
 
 # unit test
 if __name__ == '__main__':
-    parser = CommandCoder("", [])
+    generator = CommandCoder("", [])
     with open("../prototype/hello_world") as f:
         codes = f.readlines()
         for code in codes:
-            parser.setLinecode(code)
-            print(parser.parse())
+            generator.setLinecode(code)
+            level_1_commandcode = "" if generator.parseKeywd() is None else generator.parseKeywd()

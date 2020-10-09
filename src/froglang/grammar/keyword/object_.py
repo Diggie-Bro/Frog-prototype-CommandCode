@@ -20,7 +20,7 @@ class FrogOBJECT:
         get commandcode of begin object
         :return:
         """
-        commandcode = "(BEGINOBJECT ({})".format(self.name)    # commandcode
+        commandcode = "BEGINOBJECT ({})".format(self.name)    # commandcode
         return commandcode
 
     def getCommandcodeEND(self):

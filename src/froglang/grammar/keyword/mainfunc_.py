@@ -20,7 +20,7 @@ class FrogMAIN:
         get commandcode of begin main
         :return:
         """
-        commandcode = "(BEGINMAIN"    # commandcode
+        commandcode = "BEGINMAIN"    # commandcode
         return commandcode
 
     def getCommandcodeEnd(self):
@@ -29,7 +29,7 @@ class FrogMAIN:
         get commandcode of end main
         :return:
         """
-        commandcode = "ENDMAIN)"    # commandcode
+        commandcode = "ENDMAIN"    # commandcode
         return commandcode
 
 

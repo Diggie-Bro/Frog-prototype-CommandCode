@@ -14,10 +14,9 @@ class ASSIGN:
     foo = 12
     """
 
-    def __init__(self, name: str, val=None, operand=None):
+    def __init__(self, name: str, val):
         self.name = name
         self.val = val
-        self.operand = operand
 
     def getCommandcode(self):
         """
@@ -25,8 +24,7 @@ class ASSIGN:
         get commandcode of assign
         :return:
         """
-        commandcode = "ASSIGN ({name})({operand})".format(name=self.name, operand=(
-            self.val if self.val is not None else self.operand))    # commandcode
+        commandcode = "ASSIGN ({name})({operand})".format(name=self.name, operand=self.val)    # commandcode
         return commandcode
 
 

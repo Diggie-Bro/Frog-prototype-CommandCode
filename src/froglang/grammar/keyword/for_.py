@@ -20,7 +20,7 @@ class FrogFOR:
         get commandcode of begin for
         :return:
         """
-        commandcode = "(BEGINFOR ({})".format(self.statement)    # commandcode
+        commandcode = "BEGINFOR ({})".format(self.statement)    # commandcode
         return commandcode
 
     def getCommandcodeEND(self):
@@ -29,7 +29,7 @@ class FrogFOR:
         get commandcode of end for
         :return:
         """
-        commandcode = "ENDFOR)".format(self.statement)    # commandcode
+        commandcode = "ENDFOR".format(self.statement)    # commandcode
         return commandcode
 
 

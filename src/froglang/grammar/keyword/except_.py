@@ -20,7 +20,7 @@ class FrogEXCEPT:
         get commandcode of begin except
         :return:
         """
-        commandcode = "(BEGINEXCEPT ({})".format(self.error)    # commandcode
+        commandcode = "BEGINEXCEPT ({})".format(self.error)    # commandcode
         return commandcode
 
     def getCommandcodeEND(self):
@@ -29,7 +29,7 @@ class FrogEXCEPT:
         get commandcode of end except
         :return:
         """
-        commandcode = "ENDEXCEPT)"    # commandcode
+        commandcode = "ENDEXCEPT"    # commandcode
         return commandcode
 
 
