@@ -369,6 +369,22 @@ class CommandCoder:
                         l2commandcode = grammar_class(paren[:charindex], paren[charindex + 2:])\
                             .getCommandcode()
                         l1code = l1code.replace(paren, l2commandcode)
+                elif paren[charindex] is 'a' and paren[charindex + 1] is 'n' and paren[charindex + 2] is 'd' \
+                        and not isNowString: # and
+                    grammar_class = oper.operationClassList[1]
+                    l2commandcode = grammar_class(paren[:charindex], paren[charindex + 3:]).getCommandcode()
+                    l1code = l1code.replace(paren, l2commandcode)
+                elif paren[charindex] is 'o' and paren[charindex + 1] is 'r' and not isNowString: # or
+                    grammar_class = oper.operationClassList[2]
+                    l2commandcode = grammar_class(paren[:charindex], paren[charindex + 2:]).getCommandcode()
+                    l1code = l1code.replace(paren, l2commandcode)
+                elif paren[charindex] is 'n' and paren[charindex + 1] is 'o' and paren[charindex + 2] is 't' \
+                        and not isNowString: # not
+                    grammar_class = oper.operationClassList[3]
+                    l2commandcode = grammar_class(paren[charindex + 3:]).getCommandcode()
+                    l1code = l1code.replace(paren, l2commandcode)
+
+
         return l1code
 
 
