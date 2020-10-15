@@ -352,13 +352,17 @@ class CommandCoder:
         """
 
         isNowString = False
+        jumpCharCount = 0
         parens = re.findall(r"\(([^)]+)", l1code)
 
         for paren in parens:
             for charindex in range(len(list(paren))):
+                if jumpCharCount != 0:
+                    jumpCharCount -= 1
+                    continue
                 if paren[charindex] is '"':
                     isNowString = False if isNowString == True else True
-                if paren[charindex] is '=' and not isNowString:
+                if paren[charindex] is '=' and not isNowString and charindex <= len(paren) - 1 - 2:
                     """
                     available
 
@@ -369,21 +373,39 @@ class CommandCoder:
                         l2commandcode = grammar_class(paren[:charindex], paren[charindex + 2:])\
                             .getCommandcode()
                         l1code = l1code.replace(paren, l2commandcode)
-                elif paren[charindex] is 'a' and paren[charindex + 1] is 'n' and paren[charindex + 2] is 'd' \
-                        and not isNowString: # and
-                    grammar_class = oper.operationClassList[1]
-                    l2commandcode = grammar_class(paren[:charindex], paren[charindex + 3:]).getCommandcode()
-                    l1code = l1code.replace(paren, l2commandcode)
-                elif paren[charindex] is 'o' and paren[charindex + 1] is 'r' and not isNowString: # or
-                    grammar_class = oper.operationClassList[2]
-                    l2commandcode = grammar_class(paren[:charindex], paren[charindex + 2:]).getCommandcode()
-                    l1code = l1code.replace(paren, l2commandcode)
-                elif paren[charindex] is 'n' and paren[charindex + 1] is 'o' and paren[charindex + 2] is 't' \
-                        and not isNowString: # not
-                    grammar_class = oper.operationClassList[3]
-                    l2commandcode = grammar_class(paren[charindex + 3:]).getCommandcode()
-                    l1code = l1code.replace(paren, l2commandcode)
-
+                        jumpCharCount = 2
+                        continue
+                    jumpCharCount
+                elif paren[charindex] is 'a' and not isNowString and charindex <= len(paren) - 1 - 3: # and
+                    if paren[charindex + 1] is 'n':
+                        if paren[charindex + 2] is 'd':
+                            grammar_class = oper.operationClassList[1]
+                            l2commandcode = grammar_class(paren[:charindex], paren[charindex + 3:]).getCommandcode()
+                            l1code = l1code.replace(paren, l2commandcode)
+                            jumpCharCount = 3
+                            continue
+                        jumpCharCount = 2
+                        continue
+                    jumpCharCount = 1
+                elif paren[charindex] is 'o' and not isNowString and charindex <= len(paren) - 1 - 2: # or
+                    if paren[charindex + 1] is 'r':
+                        grammar_class = oper.operationClassList[2]
+                        l2commandcode = grammar_class(paren[:charindex], paren[charindex + 2:]).getCommandcode()
+                        l1code = l1code.replace(paren, l2commandcode)
+                        jumpCharCount = 2
+                        continue
+                    jumpCharCount = 1
+                elif paren[charindex] is 'n' and not isNowString and charindex <= len(paren) - 1 - 3: # not
+                    if paren[charindex + 1] is 'o':
+                        if paren[charindex + 2] is 't':
+                            grammar_class = oper.operationClassList[3]
+                            l2commandcode = grammar_class(paren[charindex + 3:]).getCommandcode()
+                            l1code = l1code.replace(paren, l2commandcode)
+                            jumpCharCount = 3
+                            continue
+                        jumpCharCount = 2
+                        continue
+                    jumpCharCount = 1
 
         return l1code
 
