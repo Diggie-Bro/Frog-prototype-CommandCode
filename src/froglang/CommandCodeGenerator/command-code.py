@@ -340,7 +340,8 @@ class CommandCoder:
 
                 grammar_class = oper.operationClassList[0]
                 if splited_code.index('=') == 1:
-                    commandcode = grammar_class(splited_code[0], splited_code[2]).getCommandcode()
+                    commandcode = grammar_class(splited_code[0], splited_code[2])\
+                        .getCommandcode()
                     return commandcode
 
     def parseDetail(self, l1code):
@@ -349,7 +350,26 @@ class CommandCoder:
         :param l1code
         parse more detail.
         """
-        pass
+
+        isNowString = False
+        parens = re.findall(r"\(([^)]+)", l1code)
+
+        for paren in parens:
+            for charindex in range(len(list(paren))):
+                if paren[charindex] is '"':
+                    isNowString = False if isNowString == True else True
+                if paren[charindex] is '=' and not isNowString:
+                    """
+                    available
+
+                    == ('=' was already proceded.)
+                    """
+                    if paren[charindex + 1] == '=' and paren[charindex + 2] != '=': # ==
+                        grammar_class = oper.operationClassList[5]
+                        l2commandcode = grammar_class(paren[:charindex], paren[charindex + 2:])\
+                            .getCommandcode()
+                        l1code = l1code.replace(paren, l2commandcode)
+        return l1code
 
 
 # unit test
@@ -360,4 +380,5 @@ if __name__ == '__main__':
         for code in codes:
             generator.setLinecode(code)
             level_1_commandcode = "" if generator.parseKeywd() is None else generator.parseKeywd()
-            print(level_1_commandcode)
+            print(generator.parseDetail(level_1_commandcode))
+
