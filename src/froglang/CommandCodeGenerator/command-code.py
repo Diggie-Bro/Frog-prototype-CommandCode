@@ -9,7 +9,7 @@ import copy
 import re
 import grammar.operations as oper
 import grammar.keywords as keywd
-
+import utils.parens as utilsparen
 
 class CommandCoder:
     """
@@ -43,7 +43,7 @@ class CommandCoder:
         # code optimization
 
         self.linecode = self.linecode.strip()
-        parens = re.findall(r"\(([^)]+)", self.linecode)
+        parens = utilsparen.parseParens(self.linecode)
         for i in range(len(parens)):
             self.linecode = self.linecode.replace(parens[i], parens[i].replace(" ", "\&SPACEPAREN"))
 
@@ -125,7 +125,7 @@ class CommandCoder:
                         and splited_code[1].index('(') < splited_code[1].index(')'):
                     splited_code = [code_snipet.replace("\&SPACEPAREN", "") for code_snipet in splited_code]
                     commandcode = grammar_class(splited_code[1][:list(splited_code[1]).index('(')],
-                                                re.findall(r"\(([^)]+)", splited_code[1])[0].split(
+                                                utilsparen.parseParens(splited_code[1])[0].split(
                                                     ',')).getCommandcodeBegin()
                     self.bracketlist.append("func")
                     return commandcode
@@ -173,7 +173,7 @@ class CommandCoder:
                         and splited_code[1].index('(') < splited_code[1].index(')'):
                     splited_code = [code_snipet.replace("\&SPACEPAREN", "") for code_snipet in splited_code]
                     commandcode = grammar_class(
-                        re.findall(r"\(([^)]+)", splited_code[1])[0]
+                        utilsparen.parseParens(splited_code[1])[0]
                     ).getCommandcodeBegin()
                     self.bracketlist.append("for")
                     return commandcode
@@ -192,7 +192,7 @@ class CommandCoder:
                         and splited_code[1].index('(') < splited_code[1].index(')'):
                     splited_code = [code_snipet.replace("\&SPACEPAREN", "") for code_snipet in splited_code]
                     commandcode = grammar_class(
-                        re.findall(r"\(([^)]+)", splited_code[1])[0]
+                        utilsparen.parseParens(splited_code[1])[0]
                     ).getCommandcodeBegin()
                     self.bracketlist.append("if")
                     return commandcode
@@ -274,7 +274,7 @@ class CommandCoder:
                         and splited_code[1].index('(') < splited_code[1].index(')'):
                     splited_code = [code_snipet.replace("\&SPACEPAREN", "") for code_snipet in splited_code]
                     commandcode = grammar_class(
-                        re.findall(r"\(([^)]+)", splited_code[1])[0]
+                        utilsparen.parseParens(splited_code[1])[0]
                     ).getCommandcodeBegin()
                     self.bracketlist.append("elif")
                     return commandcode
@@ -295,7 +295,7 @@ class CommandCoder:
                     splited_code = [code_snipet.replace("\&SPACEPAREN", "") for code_snipet in splited_code]
                     commandcode = grammar_class(
                         ''.join(list(splited_code[1])[:list(splited_code[1]).index("(")]),
-                        re.findall(r"\(([^)]+)", splited_code[1])[0].split(',')
+                        utilsparen.parseParens(splited_code[1])[0].split(',')
                     ).getCommandcode()
                     return commandcode
             # :TODO GrammmarError handles
@@ -353,8 +353,17 @@ class CommandCoder:
 
         isNowString = False
         jumpCharCount = 0
-        parens = re.findall(r"\(([^)]+)", l1code)
 
+        """
+        solution
+
+        IF(statement)
+
+        for paren in parens:
+            # parsing code.
+        """
+
+        parens = utilsparen.parseParens(l1code)
         for paren in parens:
             for charindex in range(len(list(paren))):
                 if jumpCharCount != 0:
@@ -362,6 +371,69 @@ class CommandCoder:
                     continue
                 if paren[charindex] is '"':
                     isNowString = False if isNowString == True else True
+                if paren[charindex] is 'a' and not isNowString and charindex <= len(paren) - 1 - 3: # and
+                    if paren[charindex + 1] is 'n':
+                        if paren[charindex + 2] is 'd':
+                            grammar_class = oper.operationClassList[1]
+                            l2commandcode = grammar_class(paren[:charindex], paren[charindex + 3:]).getCommandcode()
+                            l1code = l1code.replace(paren, l2commandcode)
+                            jumpCharCount = 3
+                            continue
+                        jumpCharCount = 2
+                        continue
+
+        parens = utilsparen.parseParens(l1code)
+        isNowString = False
+        for paren in parens:
+            for charindex in range(len(list(paren))):
+                if jumpCharCount != 0:
+                    jumpCharCount -= 1
+                    continue
+                if paren[charindex] is '"':
+                    isNowString = False if isNowString == True else True
+
+                if paren[charindex] is 'o' and not isNowString and charindex <= len(paren) - 1 - 2: # or
+                    if paren[charindex + 1] is 'r':
+                        grammar_class = oper.operationClassList[2]
+                        l2commandcode = grammar_class(paren[:charindex], paren[charindex + 2:]).getCommandcode()
+                        l1code = l1code.replace(paren, l2commandcode)
+                        jumpCharCount = 2
+                        continue
+                    jumpCharCount = 1
+
+        
+        parens = utilsparen.parseParens(l1code)
+        isNowString = False
+        for paren in parens:
+            for charindex in range(len(list(paren))):
+                if jumpCharCount != 0:
+                    jumpCharCount -= 1
+                    continue
+                if paren[charindex] is '"':
+                    isNowString = False if isNowString == True else True
+
+                if paren[charindex] is 'n' and not isNowString and charindex <= len(paren) - 1 - 3: # not
+                    if paren[charindex + 1] is 'o':
+                        if paren[charindex + 2] is 't':
+                            grammar_class = oper.operationClassList[3]
+                            l2commandcode = grammar_class(paren[charindex + 3:]).getCommandcode()
+                            l1code = l1code.replace(paren, l2commandcode)
+                            jumpCharCount = 3
+                            continue
+                        jumpCharCount = 2
+                        continue
+                    jumpCharCount = 1
+        
+        parens = utilsparen.parseParens(l1code)
+        isNowString = False
+        for paren in parens:
+            for charindex in range(len(list(paren))):
+                if jumpCharCount != 0:
+                    jumpCharCount -= 1
+                    continue
+                if paren[charindex] is '"':
+                    isNowString = False if isNowString == True else True
+
                 if paren[charindex] is '=' and not isNowString and charindex <= len(paren) - 1 - 2:
                     """
                     available
@@ -375,37 +447,114 @@ class CommandCoder:
                         l1code = l1code.replace(paren, l2commandcode)
                         jumpCharCount = 2
                         continue
-                    jumpCharCount
-                elif paren[charindex] is 'a' and not isNowString and charindex <= len(paren) - 1 - 3: # and
-                    if paren[charindex + 1] is 'n':
-                        if paren[charindex + 2] is 'd':
-                            grammar_class = oper.operationClassList[1]
-                            l2commandcode = grammar_class(paren[:charindex], paren[charindex + 3:]).getCommandcode()
-                            l1code = l1code.replace(paren, l2commandcode)
-                            jumpCharCount = 3
-                            continue
-                        jumpCharCount = 2
-                        continue
                     jumpCharCount = 1
-                elif paren[charindex] is 'o' and not isNowString and charindex <= len(paren) - 1 - 2: # or
-                    if paren[charindex + 1] is 'r':
-                        grammar_class = oper.operationClassList[2]
+
+        parens = utilsparen.parseParens(l1code)
+        isNowString = False
+        for paren in parens:
+            for charindex in range(len(list(paren))):
+                if jumpCharCount != 0:
+                    jumpCharCount -= 1
+                    continue
+                if paren[charindex] is '"':
+                    isNowString = False if isNowString == True else True
+
+                if paren[charindex] is '.' and not isNowString:
+                    """
+                    available
+                    . ... ..<
+                    """
+                    if charindex <= len(paren) - 1 - 3 and paren[charindex + 1] is '.':
+                        if paren[charindex + 2] is '.': #...
+                            grammar_class = oper.operationClassList[7]
+                            l2commandcode = grammar_class(paren[:charindex], paren[charindex +
+                                3:]).getCommandcodeDotDotDot()
+                            l1code = l1code.replace(paren, l2commandcode)
+                        if paren[charindex + 2] is '<': #..<
+                            grammar_class = oper.operationClassList[7]
+                            l2commandcode = grammar_class(paren[:charindex], paren[charindex +
+                                3:]).getCommandcodeDotDotBig()
+                            l1code = l1code.replace(paren, l2commandcode)
+                        jumpCharCount = 3
+                    else:
+                        grammar_class = oper.operationClassList[4]
+                        l2commandcode = grammar_class([paren[:charindex], paren[:charindex + 1]]).getCommandcode()
+                        l1code = l1code.replace(paren, l2commandcode)
+
+        parens = utilsparen.parseParens(l1code)
+        isNowString = False
+        for paren in parens:
+            for charindex in range(len(list(paren))):
+                if jumpCharCount != 0:
+                    jumpCharCount -= 1
+                    continue
+                if paren[charindex] is '"':
+                    isNowString = False if isNowString == True else True
+
+                if paren[charindex] is '!' and not isNowString and charindex <= len(list(paren)) - 1 - 2:
+                    if paren[charindex + 1] is '=':
+                        grammar_class = oper.operationClassList[6]
                         l2commandcode = grammar_class(paren[:charindex], paren[charindex + 2:]).getCommandcode()
                         l1code = l1code.replace(paren, l2commandcode)
                         jumpCharCount = 2
                         continue
                     jumpCharCount = 1
-                elif paren[charindex] is 'n' and not isNowString and charindex <= len(paren) - 1 - 3: # not
-                    if paren[charindex + 1] is 'o':
-                        if paren[charindex + 2] is 't':
-                            grammar_class = oper.operationClassList[3]
-                            l2commandcode = grammar_class(paren[charindex + 3:]).getCommandcode()
-                            l1code = l1code.replace(paren, l2commandcode)
-                            jumpCharCount = 3
-                            continue
+
+
+        parens = utilsparen.parseParens(l1code)
+        isNowString = False
+        for paren in parens:
+            for charindex in range(len(list(paren))):
+                if jumpCharCount != 0:
+                    jumpCharCount -= 1
+                    continue
+                if paren[charindex] is '"':
+                    isNowString = False if isNowString == True else True
+ 
+                elif paren[charindex] is '<' and not isNowString:
+                    """
+                    available
+                    < <=
+                    """
+                    if charindex <= len(paren) - 1 - 2 and paren[charindex + 1] is '=': # <=
+                        grammar_class = oper.operationClassList[10]
+                        l2commandcode = grammar_class(paren[:charindex], paren[charindex + 2:]).getCommandcode()
+                        l1code = l1code.replace(paren, l2commandcode)
                         jumpCharCount = 2
                         continue
-                    jumpCharCount = 1
+                    elif paren[charindex + 1] is not '=': # <
+                        grammar_class = oper.operationClassList[8]
+                        l2commandcode = grammar_class(paren[:charindex], paren[charindex + 1:]).getCommandcode()
+                        l1code = l1code.replace(paren, l2commandcode)
+                        continue
+
+        parens = utilsparen.parseParens(l1code)
+        isNowString = False
+        for paren in parens:
+            for charindex in range(len(list(paren))):
+                if jumpCharCount != 0:
+                    jumpCharCount -= 1
+                    continue
+                if paren[charindex] is '"':
+                    isNowString = False if isNowString == True else True
+
+                elif paren[charindex] is '>' and not isNowString:
+                    """
+                    available
+                    > >=
+                    """
+                    if charindex <= len(paren) - 1 - 2 and paren[charindex + 1] is '=': # >
+                        grammar_class = oper.operationClassList[11]
+                        l2commandcode = grammar_class(paren[:charindex], paren[charindex + 2:]).getCommandcode()
+                        l1code = l1code.replace(paren, l2commandcode)
+                        jumpCharCount = 2
+                        continue
+                    elif paren[charindex + 1] is not '=': # <
+                        grammar_class = oper.operationClassList[9]
+                        l2commandcode = grammar_class(paren[:charindex], paren[charindex + 1:]).getCommandcode()
+                        l1code = l1code.replace(paren, l2commandcode)
+                        continue
+                        
 
         return l1code
 
@@ -418,5 +567,6 @@ if __name__ == '__main__':
         for code in codes:
             generator.setLinecode(code)
             level_1_commandcode = "" if generator.parseKeywd() is None else generator.parseKeywd()
-            print(generator.parseDetail(level_1_commandcode))
+            level_2_commandcode = generator.parseDetail(level_1_commandcode)
+            print(generator.parseDetail(level_2_commandcode))
 

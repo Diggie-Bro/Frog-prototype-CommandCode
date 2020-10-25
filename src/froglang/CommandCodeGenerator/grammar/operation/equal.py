@@ -16,9 +16,8 @@ class EQUAL:
     foo == 12
     """
 
-    def __init__(self, name: str, val=None, operand=None):
+    def __init__(self, name: str, operand=None):
         self.name = name
-        self.val = val
         self.operand = operand
 
     def getCommandcode(self):
@@ -27,8 +26,7 @@ class EQUAL:
         get commandcode of equal
         :return:
         """
-        commandcode = "EQUAL ({name})({operand})".format(name=self.name, operand=(
-            self.val if self.val is not None else self.operand))    # commandcode
+        commandcode = "EQUAL ({name})({operand})".format(name=self.name, operand=self.operand)    # commandcode
         return commandcode
 
 
@@ -40,9 +38,8 @@ class NOTEQUAL:
     foo != 12
     """
 
-    def __init__(self, name: str, val=None, operand=None):
+    def __init__(self, name: str, operand: str):
         self.name = name
-        self.val = val
         self.operand = operand
 
     def getCommandcode(self):
@@ -51,8 +48,7 @@ class NOTEQUAL:
         get commandcode of notequal
         :return:
         """
-        commandcode = "NOTEQUAL ({name})({operand})".format(name=self.name, operand=(
-            self.val if self.val is not None else self.operand))    # commandcode
+        commandcode = "NOTEQUAL ({name})({operand})".format(name=self.name, operand=self.operand)    # commandcode
         return commandcode
 
 

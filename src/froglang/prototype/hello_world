@@ -4,7 +4,7 @@ func foo(name, count, yes) {
     if (yes == "yes") {
         run print("yes!")
     }
-    elif (not yes == "no") {
+    elif (yes == "no") {
         run print("no...")
     }
     for (1...count) {
@@ -14,7 +14,6 @@ func foo(name, count, yes) {
 
 main {
     var name = "frog"
-    name = "froglang"
     const mem = "100kb"
     run foo(name, 3, "yes")
 }
