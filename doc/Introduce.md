@@ -71,7 +71,7 @@ main {
 ```
 
 You might think python is better than froglang. But, don't worry.
-***Froglang have lots of unique, also perfact grammar you'll like it.***
+***Froglang have lots of unique, also perfect grammar you'll like it.***
 
 
 Keep going, and thanks you for joining us.
