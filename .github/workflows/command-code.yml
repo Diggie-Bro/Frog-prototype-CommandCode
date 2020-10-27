@@ -27,4 +27,5 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Test
       run: |
-        python3 src/froglang/CommandCodeGenerator/command-code.py
+        cd src/froglang/CommandCodeGenerator
+        python3 command-code.py
