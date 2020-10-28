@@ -38,7 +38,7 @@ package com.frog.program
 
 class program {
     public static void main() {
-        System.out.println("hello world");y
+        System.out.println("hello world");
     }
 }
 ```
