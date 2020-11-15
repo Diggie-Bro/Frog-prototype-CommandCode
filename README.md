@@ -1,4 +1,6 @@
-# 🛠 The Frog Programming Language
+# 🛠 The Frog Programming Language Prototype
+Prototype CommandCode
+---
 
 <a href="https://github.com/Diggie-Bro/Frog"><img src="https://img.shields.io/badge/process-Develop-red"></a>
 <a href="https://github.com/Diggie-Bro/Frog"><img src="https://img.shields.io/badge/build-X-green"></a>
